@@ -11,6 +11,6 @@ self.addEventListener('fetch', function(evt) {
 
   if (evt.request.url.endsWith('fake.html')) {
     console.log('responding with example.com opaque response');
-    evt.respondWith(fetch('http://example.com', { mode: 'no-cors' }));
+    evt.respondWith(fetch('https://example.com', { mode: 'no-cors' }));
   }
 });
