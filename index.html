@@ -1,0 +1,20 @@
+<html>
+<head>
+<meta charset="utf8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<a href="fake.html">Navigate</a>
+<script>
+if (!navigator.serviceWorker) {
+  console.log('Service workers not available.');
+} else {
+  navigator.serviceWorker.register('./sw.js').then(function(swr) {
+    console.log('Service worker registered.');
+  }).catch(function(err) {
+    console.log('Service worker failed to register: ' + err);
+  });
+}
+</script>
+</body>
+</html>
