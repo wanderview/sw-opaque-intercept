@@ -4,7 +4,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<a href="fake.html">Navigate</a>
+<a href="fake.html?q=opaque">Opaque Failure</a><br/>
+<a href="fake.html?q=error">NetworkError Failure</a><br/>
+<a href="fake.html?q=used">Used Response Failure</a><br/>
+<a href="fake.html?q=canceled">Canceled Failure</a><br/>
+<a href="fake.html?q=rejected">Rejected Failure</a><br/>
+<a href="fake.html?q=throws">Throw in FetchEvent Handler</a><br/>
 <script>
 if (!navigator.serviceWorker) {
   console.log('Service workers not available.');
