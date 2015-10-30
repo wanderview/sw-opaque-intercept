@@ -11,6 +11,8 @@ self.addEventListener('fetch', function(evt) {
 
   console.log('hmm ' + evt.request.url.endsWith('opaque'));
 
+  var error = new Error('denied');
+
   if (evt.request.url.endsWith('opaque')) {
     console.log('responding with example.com opaque response');
     evt.respondWith(fetch('https://example.com', { mode: 'no-cors' }));
@@ -36,9 +38,28 @@ self.addEventListener('fetch', function(evt) {
     return;
   }
 
-  if (evt.request.url.endsWith('rejected')) {
-    evt.respondWith(Promise.reject('disaster!'));
+  if (evt.request.url.endsWith('string-reject')) {
+    evt.respondWith(Promise.reject('denied'));
     return;
+  }
+
+  if (evt.request.url.endsWith('error-reject')) {
+    evt.respondWith(Promise.reject(error));
+    return;
+  }
+
+  if (evt.request.url.endsWith('domexception-reject')) {
+    evt.respondWith(caches.match('http://example.com',
+                                 { cacheName: 'does-not-exist' }));
+    return;
+  }
+
+  if (evt.request.url.endsWith('undefined-nonresponse')) {
+    evt.respondWith(undefined);
+  }
+
+  if (evt.request.url.endsWith('error-nonresponse')) {
+    evt.respondWith(error);
   }
 
   if (evt.request.url.endsWith('throws')) {
